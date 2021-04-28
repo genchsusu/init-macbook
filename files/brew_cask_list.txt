@@ -1,0 +1,17 @@
+alfred
+android-file-transfer
+caffeine
+docker
+doubletwist
+flux
+google-chrome
+iina
+iterm2
+1password
+rectangle
+skim
+snipaste
+transmission
+timeout
+timing
+visual-studio-code

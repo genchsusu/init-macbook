@@ -31,15 +31,27 @@ fi
 brew update
 brew install $(< ./files/brew_list.txt)
 
-# Install Bash
+# Init Bash
 sed -i '' 's#^/bin/bash#/usr/local/bin/bash#g' /etc/shells
 chsh -s /usr/local/bin/bash
 cp ./files/.bash_profile ~/.bash_profile
 cp ./files/kube-ps1.sh /usr/local/opt/kube-ps1/share/kube-ps1.sh
+# krew
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+  tar zxvf krew.tar.gz &&
+  KREW=./krew-"${OS}_${ARCH}" &&
+  "$KREW" install krew
+)
 source ~/.bash_profile
 
 # 下载第三方应用
 brew install --cask $(< ./files/brew_cask_list.txt)
+# iterm2
+cp ./files/Profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 # appcleaner \
 # microsoft-office \

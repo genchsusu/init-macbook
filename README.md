@@ -6,5 +6,8 @@
 
 3. Install Common software
 
+iTerm2:
+![ImageInitIterm](./files/iterm2.png)
+
 TODO:
 use yaml to manage varables
